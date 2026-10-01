@@ -1,0 +1,130 @@
+/* Zaynyg World Dynasty Blog — styles */
+:root {
+  --ink: #2b2140;
+  --purple: #5b3a9e;
+  --gold: #d4a017;
+  --gold-soft: #f5d76e;
+  --cream: #fff9f0;
+  --card: #ffffff;
+  --muted: #6f6486;
+  --line: #e9e0f5;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Georgia, 'Times New Roman', serif;
+  background: var(--cream);
+  color: var(--ink);
+  line-height: 1.7;
+}
+a { color: var(--purple); }
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+
+/* Header */
+.site-header {
+  background: linear-gradient(135deg, #241a3d, #4a2f7d);
+  color: #fff;
+  padding: 28px 0 20px;
+  border-bottom: 4px solid var(--gold);
+}
+.brand { font-size: 1.9rem; margin: 0; letter-spacing: 1px; }
+.brand .dynasty { color: var(--gold-soft); }
+.tagline { margin: 6px 0 14px; color: #d9cbf2; font-style: italic; }
+nav.main-nav { display: flex; flex-wrap: wrap; gap: 6px 18px; align-items: center; }
+nav.main-nav a { color: #fff; text-decoration: none; font-family: Arial, Helvetica, sans-serif; font-size: .95rem; }
+nav.main-nav a:hover { color: var(--gold-soft); text-decoration: underline; }
+.nav-cta {
+  background: var(--gold); color: #241a3d !important; font-weight: bold;
+  padding: 8px 16px; border-radius: 999px; text-decoration: none;
+}
+.nav-cta:hover { background: var(--gold-soft); text-decoration: none !important; }
+
+/* Hero */
+.hero {
+  background: #fff; border: 1px solid var(--line); border-radius: 14px;
+  padding: 28px; margin: 28px 0; text-align: center;
+  box-shadow: 0 4px 18px rgba(91,58,158,.08);
+}
+.hero h1 { margin-top: 0; font-size: 1.8rem; }
+.hero p { color: var(--muted); }
+.btn {
+  display: inline-block; background: var(--purple); color: #fff !important;
+  padding: 12px 26px; border-radius: 999px; text-decoration: none; font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif; margin: 6px;
+}
+.btn:hover { background: #4a2f7d; }
+.btn.gold { background: var(--gold); color: #241a3d !important; }
+.btn.gold:hover { background: var(--gold-soft); }
+
+/* Post cards */
+.post-grid { display: grid; gap: 18px; margin: 20px 0 34px; }
+.post-card {
+  background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+  padding: 22px; box-shadow: 0 2px 10px rgba(91,58,158,.06);
+}
+.post-card h3 { margin: 0 0 8px; }
+.post-card h3 a { color: var(--ink); text-decoration: none; }
+.post-card h3 a:hover { color: var(--purple); }
+.post-card p { color: var(--muted); margin: 0 0 10px; }
+.kicker {
+  display: inline-block; font-family: Arial, Helvetica, sans-serif; font-size: .75rem;
+  text-transform: uppercase; letter-spacing: 1px; color: var(--purple);
+  background: #efe7fb; padding: 4px 10px; border-radius: 999px; margin-bottom: 10px;
+}
+.read-more { font-family: Arial, Helvetica, sans-serif; font-weight: bold; }
+
+/* Article */
+article.post { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 30px 28px; margin: 28px 0; }
+article.post h1 { margin-top: 0; }
+.byline { color: var(--muted); font-size: .9rem; font-family: Arial, Helvetica, sans-serif; }
+.gift-item { border-top: 2px dashed var(--line); padding: 20px 0; }
+.gift-item h3 { margin-bottom: 6px; }
+.gift-item .rank {
+  display: inline-block; background: var(--purple); color: #fff; font-family: Arial, Helvetica, sans-serif;
+  width: 30px; height: 30px; line-height: 30px; text-align: center; border-radius: 50%; margin-right: 8px;
+  font-size: .9rem;
+}
+
+/* Email capture */
+.email-box {
+  background: linear-gradient(135deg, #4a2f7d, #6c3fb5); color: #fff;
+  border-radius: 14px; padding: 28px; margin: 30px 0; text-align: center;
+}
+.email-box h2, .email-box h3 { margin-top: 0; color: var(--gold-soft); }
+.email-box p { color: #e6dcf7; }
+.email-box form { display: flex; flex-direction: column; gap: 10px; max-width: 420px; margin: 16px auto 0; }
+.email-box input {
+  padding: 12px 16px; border-radius: 999px; border: none; font-size: 1rem;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.email-box button {
+  padding: 12px 16px; border-radius: 999px; border: none; font-size: 1rem; font-weight: bold;
+  background: var(--gold); color: #241a3d; cursor: pointer; font-family: Arial, Helvetica, sans-serif;
+}
+.email-box button:hover { background: var(--gold-soft); }
+.email-box small { color: #cbb8ee; font-family: Arial, Helvetica, sans-serif; }
+
+/* Book list */
+.book-item {
+  display: block; background: #fff; border: 1px solid var(--line); border-radius: 12px;
+  padding: 20px; margin: 14px 0;
+}
+.book-item h3 { margin: 0 0 6px; }
+.book-item .price { font-family: Arial, Helvetica, sans-serif; font-weight: bold; color: var(--purple); }
+
+/* Footer */
+.site-footer {
+  background: #241a3d; color: #cbb8ee; padding: 30px 0; margin-top: 40px;
+  font-family: Arial, Helvetica, sans-serif; font-size: .9rem;
+}
+.site-footer a { color: var(--gold-soft); }
+.footer-grid { display: flex; flex-wrap: wrap; gap: 24px; justify-content: space-between; }
+.site-footer h4 { color: #fff; margin: 0 0 8px; }
+.site-footer ul { list-style: none; padding: 0; margin: 0; }
+.site-footer li { margin: 4px 0; }
+.copyright { text-align: center; margin-top: 24px; color: #8f7fb8; font-size: .8rem; }
+
+@media (max-width: 560px) {
+  .brand { font-size: 1.5rem; }
+  article.post { padding: 22px 18px; }
+}
