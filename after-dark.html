@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zaynyg After Dark (18+) | Zaynyg World Dynasty</title>
+  <meta name="description" content="Grown-up romance ebooks for adult readers only. 18+ — you must confirm your age to enter.">
+  <meta property="og:title" content="Zaynyg After Dark — 18+ Only">
+  <meta property="og:description" content="Grown-up romance ebooks. Adults only.">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .store-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 18px; margin: 20px 0 34px; }
+    .store-card { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 16px; text-align: center; box-shadow: 0 2px 10px rgba(91,58,158,.06); display: flex; flex-direction: column; }
+    .store-card img { width: 100%; height: auto; border-radius: 8px; aspect-ratio: 2/3; object-fit: cover; }
+    .store-card h3 { margin: 12px 0 6px; font-size: 1.05rem; }
+    .store-card .blurb { color: var(--muted); font-size: .88rem; flex-grow: 1; }
+    .store-card .price { font-family: Arial, Helvetica, sans-serif; font-weight: bold; color: var(--purple); font-size: 1.15rem; margin: 8px 0; }
+    .store-card .format { font-family: Arial, Helvetica, sans-serif; font-size: .78rem; color: var(--muted); }
+    .btn.disabled { background: #b9aecb; cursor: default; }
+    .section-note { text-align: center; color: var(--muted); }
+    #age-gate { position: fixed; inset: 0; background: #1a1230; color: #fff; z-index: 9999; display: flex; align-items: center; justify-content: center; text-align: center; padding: 24px; }
+    #age-gate .gate-box { max-width: 440px; }
+    #age-gate h1 { color: var(--gold-soft); }
+    #age-gate p { color: #d9cbf2; }
+    #age-gate .btn { margin: 8px; }
+    .age-badge { display: inline-block; background: #1a1230; color: var(--gold-soft); font-family: Arial, Helvetica, sans-serif; font-weight: bold; padding: 4px 14px; border-radius: 999px; font-size: .8rem; margin-bottom: 8px; }
+  </style>
+</head>
+<body>
+
+<div id="age-gate" role="dialog" aria-label="Age confirmation">
+  <div class="gate-box">
+    <h1>🔞 Zaynyg After Dark</h1>
+    <p>This section contains grown-up romance ebooks with explicit romantic content, intended <strong>solely for adult readers aged 18 and over</strong>.</p>
+    <p>Are you 18 or older?</p>
+    <button class="btn gold" id="age-yes">Yes, I'm 18+</button>
+    <a class="btn" href="store.html">No — take me back</a>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="wrap">
+    <p class="brand">Zaynyg <span class="dynasty">After Dark</span></p>
+    <p class="tagline">Grown-up romance, written with heart. Adults only.</p>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="store.html">Store</a>
+      <a href="books.html">Family Books</a>
+      <a href="films.html">Films</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap" id="main-content" style="display:none;">
+  <section class="hero">
+    <span class="age-badge">🔞 18+ ADULTS ONLY</span>
+    <h1>Zaynyg After Dark</h1>
+    <p>Steamy, heartfelt romance ebooks for grown-up readers. Every ebook is <strong>$7.99</strong>, delivered to your email as <strong>EPUB + PDF</strong> after checkout. Secure payment by Stripe.</p>
+    <p class="section-note">All characters are adults. All intimacy is enthusiastic and consensual.</p>
+  </section>
+
+  <div class="store-grid" id="adult-grid"><p>Loading…</p></div>
+
+  <p class="section-note">← <a href="store.html">Back to the family store</a></p>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="copyright"><a href="privacy.html">Privacy Policy</a> · © 2026 Zaynyg World Dynasty. All original content. 18+ section — adults only.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var gate = document.getElementById('age-gate');
+  var main = document.getElementById('main-content');
+  function enter() { gate.style.display = 'none'; main.style.display = 'block'; try { sessionStorage.setItem('zad-age-ok', '1'); } catch (e) {} }
+  try { if (sessionStorage.getItem('zad-age-ok') === '1') { enter(); } } catch (e) {}
+  document.getElementById('age-yes').addEventListener('click', enter);
+
+  fetch('catalog.json')
+    .then(function (r) { return r.json(); })
+    .then(function (catalog) {
+      var grid = document.getElementById('adult-grid');
+      grid.innerHTML = '';
+      catalog.products
+        .filter(function (p) { return p.lane === 'after-dark'; })
+        .forEach(function (p) {
+          var card = document.createElement('div');
+          card.className = 'store-card';
+          var live = p.payment_link && p.payment_link.indexOf('PASTE_LINK_HERE') === -1;
+          card.innerHTML =
+            '<img src="' + p.cover + '" alt="' + p.title.replace(/"/g, '') + ' cover" loading="lazy">' +
+            '<h3>' + p.title + '</h3>' +
+            '<p class="blurb">' + p.blurb + '</p>' +
+            '<p class="format">' + p.format + '</p>' +
+            '<p class="price">$' + p.price.toFixed(2) + '</p>' +
+            (live
+              ? '<a class="btn" href="' + p.payment_link + '">Buy Now</a>'
+              : '<span class="btn disabled">Coming soon</span>');
+          grid.appendChild(card);
+        });
+    })
+    .catch(function () {
+      document.getElementById('adult-grid').innerHTML = '<p>Could not load the catalog — please try again later.</p>';
+    });
+})();
+</script>
+</body>
+</html>
